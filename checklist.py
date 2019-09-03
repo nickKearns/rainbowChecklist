@@ -1,37 +1,45 @@
 checklist = list()
 checklist.append('Blue')
-print(checklist)
+#print(checklist)
 checklist.append('Orange')
-print(checklist)
+#print(checklist)
+
 # CREATEs
 def create(item):
     checklist.append(item)
+
 # READ
 def read(index):
-    if index > 0 and index < len(checklist):
+    if index > 0 and index < len(checklist)-1:
         return checklist[index]
     else:
-        return "Invalid index"
+        print("invalid index")
+
 # UPDATE
 def update(index, item):
-    if index > 0 and index < len(checklist):
+    if index > 0 and index < len(checklist)-1:
         checklist[index] = item
     else:
-        print("Invalid index")
+        print("invalid index")
+    
+
 # DESTROY
 def destroy(index):
-    if index > 0 and index < len(checklist):
+    if index > 0 and index < len(checklist)-1:
         checklist.pop(index)
     else:
-        print("Invalid index")
+        print("invalid index")
+
+#List items
 def list_all_items():
     index = 0
     for list_item in checklist:
         print("{} {}".format(index, list_item))
         index += 1
 
+#Mark completed
 def mark_completed(index):
-    if index > 0 and index < len(checklist):
+    if index > 0 and index < len(checklist)-1:
         current_item = checklist[index]
         if "√" in current_item:
             return ""
@@ -39,34 +47,55 @@ def mark_completed(index):
             update(index, "√" + checklist[index])
             return checklist[index]
     else:
-        print("Invalid index")
+        print("invalid index")
 
+#User Input
+def user_input(prompt):
+    user_input = input(prompt)
+    return user_input
+
+
+#Select
 def select(function_code):
-    if function_code == "C" or "c":
-        input_item = user_input("Input Item: \n")
+    if function_code == "C" or function_code == "c":
+        input_item = user_input("Input Item: ")
         create(input_item)
-    elif function_code == "R" or "r":
-        item_index = user_input("Index Number? \n")
-        read(item_index)
-    elif function_code == "P" or "p":
+        return True
+
+    elif function_code == "R" or function_code == "r":
+        item_index = user_input("Index Number? ")
+        item = read(int(item_index))
+        print(item)
+        return True
+
+    elif function_code == "P" or function_code == "p":
         list_all_items()
-    elif function_code == "Q" or "q":
+        return True
+
+    elif function_code == "Q" or function_code == "q":
         return False
-    elif function_code == "U" or "u":
-        item_index = user_input("Index Number? \n")
-        new_item = user_input("Input Item: \n")
+
+    elif function_code == "U" or function_code == "u":
+        item_index = user_input("Index Number? ")
+        new_item = user_input("Input Item:")
         update(item_index, new_item)
-    elif function_code == "f" or "f":
-        item_index = user_input("Index Number? \n")
+        return True
+
+    elif function_code == "D" or function_code == "d":
+        item_index = user_input("Index Number?")
         destroy(item_index)
+        return True
+
     else:
         print("Unknown Option")
 
 
-        
-def user_input(prompt):
-    user_input = input(prompt)
-    return user_input
+  
+running = True
+while running:
+    selection = user_input("Press C to add to the list, R to read from the list, \n U to update the list, D to delete something from the list, \n  P to display the list, and Q to exit \n")
+    running = select(selection)
+
 
 
 
@@ -89,11 +118,3 @@ def user_input(prompt):
     # list_all_items()
     # select("R")
     # list_all_items()
-
-running = True
-while running:
-    selection = user_input("Press C to add to the list, R to read from the list, \n P to display the list, and Q to stop exit \n")
-    select(selection)
-    if selection == "Q":
-        running = select("Q")
-
