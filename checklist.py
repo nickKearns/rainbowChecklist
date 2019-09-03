@@ -10,14 +10,14 @@ def create(item):
 
 # READ
 def read(index):
-    if index > 0 and index < len(checklist)-1:
+    if index >= 0 and index < len(checklist):
         return checklist[index]
     else:
         print("invalid index")
 
 # UPDATE
 def update(index, item):
-    if index > 0 and index < len(checklist)-1:
+    if index >= 0 and index < len(checklist):
         checklist[index] = item
     else:
         print("invalid index")
@@ -25,7 +25,7 @@ def update(index, item):
 
 # DESTROY
 def destroy(index):
-    if index > 0 and index < len(checklist)-1:
+    if index >= 0 and index < len(checklist):
         checklist.pop(index)
     else:
         print("invalid index")
@@ -39,7 +39,7 @@ def list_all_items():
 
 #Mark completed
 def mark_completed(index):
-    if index > 0 and index < len(checklist)-1:
+    if index >= 0 and index < len(checklist):
         current_item = checklist[index]
         if "√" in current_item:
             return ""
@@ -86,6 +86,10 @@ def select(function_code):
         destroy(item_index)
         return True
 
+    elif function_code == "M" or function_code == "m":
+        item_index = user_input("Index number?")
+        mark_completed(int(item_index))
+        return True
     else:
         print("Unknown Option")
 
@@ -93,8 +97,9 @@ def select(function_code):
   
 running = True
 while running:
-    selection = user_input("Press C to add to the list, R to read from the list, \n U to update the list, D to delete something from the list, \n  P to display the list, and Q to exit \n")
+    selection = user_input("Press C to add to the list, R to read from the list, \n U to update the list, D to delete something from the list, \n  P to display the list, M to mark an item as complete, and Q to exit \n")
     running = select(selection)
+
 
 
 
