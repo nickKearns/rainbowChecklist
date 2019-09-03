@@ -19,7 +19,7 @@ def destroy(index):
 def list_all_items():
     index = 0
     for list_item in checklist:
-        print("{} {}".format(index + list_item))
+        print("{} {}".format(index, list_item))
         index += 1
 
 def mark_completed(index):
@@ -36,9 +36,11 @@ def select(function_code):
         create(input_item)
     elif function_code == "R":
         item_index = user_input("Index Number?")
-        read(item_index)
+        print(read(int(item_index)))
     elif function_code == "P":
         list_all_items()
+    elif function_code == "Q":
+        return False
     else:
         print("Unknown Option")
 
@@ -52,7 +54,7 @@ def user_input(prompt):
 
 # TEST
 def test():
-    # Add testing code here
+    #Add testing code here
     create("purple sox")
     create("red cloak")
 
@@ -64,11 +66,19 @@ def test():
 
     print(read(0))
     print(read(1))
-    print(mark_completed(0))
+    print(mark_completed(0)) 
+    select("C")
+    list_all_items()
+    select("R")
+    list_all_items()
+
 
 
     
+running = True
+while running:
+    selection = user_input("Press C to add to the list, R to read from the list, \n P to display the list, and Q to stop exit \n")
+    select(selection)
+    if selection == "Q":
+        running = select("Q")
 
-
-
-test()
