@@ -27,11 +27,26 @@ def mark_completed(index):
     if "√" in current_item:
         return ""
     else:
-        checklist[index] = "√" + current_item
+        update(index, "√" + checklist[index])
         return checklist[index]
 
-        
+def select(function_code):
+    if function_code == "C":
+        input_item = user_input("Input Item:")
+        create(input_item)
+    elif function_code == "R":
+        item_index = user_input("Index Number?")
+        read(item_index)
+    elif function_code == "P":
+        list_all_items()
+    else:
+        print("Unknown Option")
 
+
+        
+def user_input(prompt):
+    user_input = input(prompt)
+    return user_input
 
 
 
