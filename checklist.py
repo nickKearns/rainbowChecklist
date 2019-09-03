@@ -17,8 +17,21 @@ def destroy(index):
     checklist.pop(index)
 
 def list_all_items():
+    index = 0
     for list_item in checklist:
-        print(list_item)
+        print("{} {}".format(index + list_item))
+        index += 1
+
+def mark_completed(index):
+    current_item = checklist[index]
+    if "√" in current_item:
+        return ""
+    else:
+        checklist[index] = "√" + current_item
+        return checklist[index]
+
+        
+
 
 
 
@@ -36,6 +49,9 @@ def test():
 
     print(read(0))
     print(read(1))
+    print(mark_completed(0))
+
+
     
 
 
